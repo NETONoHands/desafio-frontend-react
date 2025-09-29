@@ -1,6 +1,4 @@
 import db from '../db.json'
-import PlantImage from '../assets/Plant.png'
-import CowImage from '../assets/Cow.png'
 import '../css/Home.css'
 import  CardProduto  from '../components/CardProduto'
 
