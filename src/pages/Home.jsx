@@ -1,12 +1,13 @@
-import db from '../db.json'
+import { dados } from '../data.js'
 import '../css/Home.css'
-import  CardProduto  from '../components/CardProduto'
+import { CardProduto } from '../components/CardProduto'
+import { useState } from 'react';
 
 
 export function Home() {
 
-  const classicos = db.produtos.filter(produto => produto.categoria === "classicos");
-  const gelados = db.produtos.filter(produto => produto.categoria === "gelados");
+  const [classicos] = useState(dados.produtos.filter(produto => produto.categoria === "classicos"));
+  const [gelados] = useState(dados.produtos.filter(produto => produto.categoria === "gelados"));
 
   return (
     <>    
@@ -24,9 +25,10 @@ export function Home() {
             <h2 className="products__title">Clássicos</h2>
             <div className="products__list">
               
-              {classicos.map((produto, index) => (
-                <CardProduto item={produto} key={produto.id} />
-              ))}
+              {classicos.map((produto, key) => (
+                <CardProduto item={produto} key={produto.id}/>
+              )
+              )}
               
             </div>
           </div>
@@ -36,7 +38,7 @@ export function Home() {
             <h2 className="products__title">Gelados</h2>
             <div className="products__list">
 
-              {gelados.map((produto, index) => (
+              {gelados.map((produto, key) => (
                 <CardProduto item={produto} key={produto.id} />
               ))}
               

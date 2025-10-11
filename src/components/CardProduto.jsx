@@ -1,7 +1,7 @@
 import PlantImage from '../assets/Plant.png'
 import CowImage from '../assets/Cow.png'
 
-export default function CardProduto ({ item }) {
+export function CardProduto ({ item }) {
     
     function formataPreco (valor) {
         return 'R$ ' + (valor / 100).toFixed(2).replace('.', ',');
