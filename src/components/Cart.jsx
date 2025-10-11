@@ -50,11 +50,11 @@ export function Cart() {
 
                 <section className="product__quantity">
                   <button type="button" className="product__quantityMinus">
-                    <img src={plusImage} alt="mais um" />
+                    <img src={minusImage} alt="menos um" />
                   </button>
                   <input type="text" readOnly className="product__quantityInput" value={1} />
                   <button type="button" className="product__quantityPlus">
-                    <img src={minusImage} alt="menos um" />
+                    <img src={plusImage} alt="mais um" />
                   </button>
                 </section>
               </div>
