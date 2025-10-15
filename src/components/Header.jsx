@@ -1,20 +1,29 @@
+import { useState } from 'react';
 import logoImage from '../assets/logo.svg'
-import ToteImage from '../assets/Tote.svg'
-import { Cart } from './Cart'
+import { Carrinho } from './Carrinho'
+import { ShoppingBag } from './ShoppingBag'
 
 export function Header() {
+
+const [isCarrinhoOpen, setIsCarrinhoOpen] = useState(false);
+
+  const abreCarrinho = () => {
+    setIsCarrinhoOpen(true);
+  };
+
+  const fechaCarrinho = () => {
+    setIsCarrinhoOpen(false);
+  };
+  
   return (
     <header className="header">
       <div className="container">
         <a href="./index.html">
           <img className="header__logo" src={logoImage} alt="logo CoffeeSpresso" />
         </a>
-        <a href="#" className="link__quantity">
-          <img src={ToteImage} alt="Carrinho" />
-          <span className="badge__quantity">1</span>
-        </a>
+        <ShoppingBag clicaNaBolsa={abreCarrinho} />
       </div>
-      <Cart />
+      <Carrinho carrinhoTaAberto={isCarrinhoOpen} clicaNoX={fechaCarrinho} />
     </header>
   )
 }

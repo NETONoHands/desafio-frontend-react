@@ -1,33 +1,19 @@
-import React from "react";
-import CloseIcon from "../assets/X.svg";
 
-export function TextInput({ value, onChange, placeholder, label }) {
+export function TextInput({ value, onChange, placeholder }) {
 
-  function handleClear() {
-    onChange("");
+  const handleChange = (event) => {
+    onChange(event.target.value);
   }
 
-  return (
-    <div className="textinput flex flex-col mb-4">
-      {label && <label className="textinput__label mb-1 font-medium text-sm">{label}</label>}
-      <div className="textinput__wrapper relative flex items-center">
-        <input
-          type="text"
-          className="textinput__input w-full border border-gray-300 rounded-md p-2 pr-10 focus:outline-none focus:border-purple-700"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
-        />
-        {value && (
-          <button
-            type="button"
-            className="textinput__clearButton absolute right-2 p-1"
-            onClick={handleClear}
-          >
-            <img src={CloseIcon} alt="limpar" className="w-4 h-4" />
-          </button>
-        )}
-      </div>
-    </div>
-  );
+  return <section className="product__observation">
+            <label htmlFor="observation">Observações sobre o pedido</label>
+            <textarea 
+            id="observation" 
+            value={value}
+            onChange={handleChange}
+            placeholder="Digite suas observações. Ex.: Enviar açúcar"
+            rows={3}  />
+          </section>
 }
+
+export default TextInput;

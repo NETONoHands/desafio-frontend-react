@@ -2,20 +2,23 @@ import { dados } from '../data'
 import { useParams } from 'react-router-dom'
 import CowImage from '../assets/Cow.png'
 import PlantImage from '../assets/Plant.png'
-import MinusImage from '../assets/Minus.svg'
-import PlusImage from '../assets/Plus.svg'
 import '../css/Product.css'
 import { Button } from '../components/Button'
 import { NumberInput } from '../components/NumberInput'
+import { TextInput } from '../components/TextInput'
+import { useState } from 'react'
 
 export function Product() {
 
   const { path ,id } = useParams();
   const produto = dados.produtos.find(p => String(p.id) === id);
-  console.log(produto);
-  console.log(path);
-  console.log(id, dados.produtos.map(p => p.id));
-  console.log(String(dados.produtos.id) === id);
+
+  const [obs, setObs] = useState('');
+  const [quantidade, setQuantidade] = useState(1);
+
+   const handleQuantityChange = (novaQuantidade) => {
+    setQuantidade(novaQuantidade);
+  };
 
   if (!produto) {
     return (
@@ -30,7 +33,7 @@ export function Product() {
     <>
       <main>
         <div className="container product__container">
-          <a href="/" className="product__link">Voltar para o início</a>
+          <a href= '/' className="product__link">Voltar para o início</a>
           <section className="product">
             <div className="product__container--image">
               <img src={produto.imagem} className="product__image" alt={produto.nome} />
@@ -49,13 +52,18 @@ export function Product() {
                 {produto.descricao}
               </p>
               <form>
-                <section className="product__observation">
-                  <label htmlFor="observation">Observações sobre o pedido</label>
-                  <textarea rows={3} name="observation" id="observation" placeholder="Digite suas observações. Ex.: Enviar açúcar"></textarea>
-                </section>
+                <TextInput
+                value={obs}
+                onChange={setObs}/>
+                
                 <div className="product__buy">
-                  <NumberInput />
+
+                  <NumberInput 
+                  value={quantidade} 
+                  onChange={handleQuantityChange} />
+
                   <Button />
+
                 </div>
               </form>
             </div>

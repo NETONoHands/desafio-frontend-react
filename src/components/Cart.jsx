@@ -6,6 +6,7 @@ import minusImage  from '../assets/Minus.svg'
 import '../css/cart.css'
 
 export function Cart() {
+  
   return (
     <div className="cart">
       <section className="cart__header">
