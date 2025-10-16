@@ -2,30 +2,25 @@ import { useState } from "react";
 import MinusImage from "../assets/Minus.svg"
 import PlusImage from "../assets/Plus.svg"
 
-export function NumberInput (value, onChange) {
+export function NumberInput ({ value = 1, onChange, min = 1, max = 99 }) {
 
-  const [quantidade, setQuantidade] = useState(value || 1);
-
-      const maisUm = () => {
-        if (quantidade < 99) {
-          const novaQuantidade = quantidade + 1;
-          setQuantidade(novaQuantidade);
-          onChange(novaQuantidade);
-  }};
-
-  const menosUm = () => {
-    if (quantidade > 1) {
-      const novaQuantidade = quantidade - 1;
-      setQuantidade(novaQuantidade);
-      onChange(novaQuantidade);
+  const maisUm = () => {
+    if (value <= max) {
+      onChange(value + 1);
+    }
   };
 
-  const handleInputChange = (event) => {
-    const valor = parseInt(event.target.value) || 1;
+  const menosUm = () => {
+    if (value >= min) {
+      onChange(value - 1);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const novoValor = parseInt(e.target.value);
     
-    if (valor >= 1 && valor <= 99) {
-      setQuantidade(valor);
-      onChange(valor);
+    if (!isNaN(novoValor) && novoValor >= min && novoValor <= max) {
+      onChange(novoValor);
     }
   };
 
@@ -33,28 +28,24 @@ export function NumberInput (value, onChange) {
                   <button 
                   type="button"
                   className="product__quantity--minus"
-                  onClick={menosUm}
-                  disabled={quantidade <= 1}>
+                  onClick={menosUm}>
                         <img src={MinusImage} alt="menos um" />
                   </button>
 
                   <input 
-                  type="text" 
+                  type="number" 
                   className="product__quantity--input" 
-                  value={quantidade}
+                  value={value}
                   onChange={handleInputChange}
-                  readOnly
-                  min="1"
-                  max="99" />
+                  readOnly />
 
                   <button 
                   type="button"
                   className="product__quantity--plus"
-                  onClick={maisUm}
-                  disabled={quantidade >= 99}>
+                  onClick={maisUm}>
                         <img src={PlusImage} alt="mais um" />
                   </button>
             </section>
-}};
+};
 
 export default NumberInput;

@@ -16,10 +16,6 @@ export function Product() {
   const [obs, setObs] = useState('');
   const [quantidade, setQuantidade] = useState(1);
 
-   const handleQuantityChange = (novaQuantidade) => {
-    setQuantidade(novaQuantidade);
-  };
-
   if (!produto) {
     return (
       <div className="container product__container">
@@ -59,10 +55,10 @@ export function Product() {
                 <div className="product__buy">
 
                   <NumberInput 
-                  value={quantidade} 
-                  onChange={handleQuantityChange} />
+                  value={quantidade}
+                  onChange={setQuantidade} />
 
-                  <Button />
+                  <Button handleClick={() => adicionarAoCarrinho(produto, quantidade, obs)}/>
 
                 </div>
               </form>

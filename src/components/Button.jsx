@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-export function Button({ handleClick}) {
+export function Button({ handleClick }) {
 
     const [itemCarrinho, setItemCarrinho] = useState({
     "id": "",
