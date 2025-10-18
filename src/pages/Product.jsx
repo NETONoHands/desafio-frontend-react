@@ -1,5 +1,5 @@
 import { dados } from '../data'
-import { useParams } from 'react-router-dom'
+import { useOutletContext, useParams } from 'react-router-dom'
 import CowImage from '../assets/Cow.png'
 import PlantImage from '../assets/Plant.png'
 import '../css/Product.css'
@@ -7,14 +7,28 @@ import { Button } from '../components/Button'
 import { NumberInput } from '../components/NumberInput'
 import { TextInput } from '../components/TextInput'
 import { useState } from 'react'
+import formataPreco from '../utils/generalFunctions'
 
 export function Product() {
 
   const { path ,id } = useParams();
   const produto = dados.produtos.find(p => String(p.id) === id);
 
+  const { adicionarAoCarrinho } = useOutletContext();
+
   const [obs, setObs] = useState('');
   const [quantidade, setQuantidade] = useState(1);
+
+  const handleAdicionarAoCarrinho = () => {
+
+    adicionarAoCarrinho(produto, quantidade, obs);
+    
+    
+    alert(`${quantidade}x ${produto.nome} adicionado ao carrinho!`);
+    
+    setObs('');
+    setQuantidade(1);
+  }
 
   if (!produto) {
     return (
@@ -36,7 +50,7 @@ export function Product() {
             </div>
             <div className="product__data">
               <h1 className="product__title">{produto.nome}</h1>
-              <h2 className="product__price">{produto.preco.por}</h2>
+              <h2 className="product__price">{formataPreco(produto.preco.por)}</h2>
               <div className="product__tag">
                 {
                 produto.vegano ? 
@@ -58,7 +72,9 @@ export function Product() {
                   value={quantidade}
                   onChange={setQuantidade} />
 
-                  <Button handleClick={() => adicionarAoCarrinho(produto, quantidade, obs)}/>
+                  <Button 
+                    texto="Comprar"
+                    handleClick={handleAdicionarAoCarrinho}/>
 
                 </div>
               </form>

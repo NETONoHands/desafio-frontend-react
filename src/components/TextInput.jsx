@@ -1,8 +1,8 @@
 
 export function TextInput({ value, onChange, placeholder }) {
 
-  const handleChange = (event) => {
-    onChange(event.target.value);
+  const handleChange = (e) => {
+    onChange(e.target.value);
   }
 
   return <section className="product__observation">

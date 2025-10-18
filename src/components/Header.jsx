@@ -1,44 +1,18 @@
-import { useState } from 'react';
 import logoImage from '../assets/logo.svg'
 import { Carrinho } from './Carrinho'
 import { ShoppingBag } from './ShoppingBag'
 
-export function Header() {
+export function Header({
 
-  const [carrinho, setCarrinho] = useState([]);
+  carrinho, 
+  isCarrinhoOpen, 
+  abreCarrinho, 
+  fechaCarrinho,
+  removerDoCarrinho,
+  atualizarCarrinho,
+  limpaCarrinho
 
-  const adicionarAoCarrinho = (produto, quantidade, observacao) => {
-    const novoItem = {
-      idProduto: produto.id,
-      nome: produto.nome,
-      imagem: produto.imagem,
-      preco: produto.preco.por,
-      vegano: produto.vegano,
-      quantidade,
-      observacao
-    };
-    setCarrinho([...carrinho, novoItem]);
-  };
-
-  const removerDoCarrinho = (id) => {
-    setCarrinho(carrinho.filter(item => item.id !== id));
-  };
-
-  const atualizarQuantidade = (id, novaQuantidade) => {
-    setCarrinho(carrinho.map(item => 
-      item.id === id ? { ...item, quantidade: novaQuantidade } : item
-    ));
-  };
-
-const [isCarrinhoOpen, setIsCarrinhoOpen] = useState(false);
-
-  const abreCarrinho = () => {
-    setIsCarrinhoOpen(true);
-  };
-
-  const fechaCarrinho = () => {
-    setIsCarrinhoOpen(false);
-  };
+}) {  
   
   return (
     <header className="header">
@@ -55,7 +29,8 @@ const [isCarrinhoOpen, setIsCarrinhoOpen] = useState(false);
         clicaNoX={fechaCarrinho}
         carrinho={carrinho}
         removerDoCarrinho={removerDoCarrinho}
-        atualizarQuantidade={atualizarQuantidade} />
+        atualizarCarrinho={atualizarCarrinho}
+        limpaCarrinho={limpaCarrinho} />
     </header>
   )
 }

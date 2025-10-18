@@ -5,14 +5,18 @@ import PlusImage from "../assets/Plus.svg"
 export function NumberInput ({ value = 1, onChange, min = 1, max = 99 }) {
 
   const maisUm = () => {
-    if (value <= max) {
+    if (value < max) {
       onChange(value + 1);
+    } else {
+      return
     }
   };
 
   const menosUm = () => {
-    if (value >= min) {
+    if (value > min) {
       onChange(value - 1);
+    } else {
+      return
     }
   };
 

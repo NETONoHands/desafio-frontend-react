@@ -1,28 +1,13 @@
-import { useState } from "react"
-
-
-export function Button({ handleClick }) {
-
-    const [itemCarrinho, setItemCarrinho] = useState({
-    "id": "",
-    "idProduto": "",
-    "nome": "",
-    "imagem": "",
-    "preco": "",
-    "vegano": "",
-    "quantidade": "",
-    "observacao": ""
-});
-
-    function handleClick (e) {
-
-        setItemCarrinho ({...itemCarrinho, [item.id]: item.target.value })
-            
-    }
-
-        return  <button className="product__button">
-                        Comprar
-                </button>
+export function Button({ texto = "Comprar", handleClick }) {
+  return (
+    <button 
+      className="product__button" 
+      type="button"
+      onClick={handleClick}
+    >
+      {texto}
+    </button>
+  );
 }
 
 export default Button;

@@ -1,11 +1,8 @@
 import PlantImage from '../assets/Plant.png'
 import CowImage from '../assets/Cow.png'
+import formataPreco from '../utils/generalFunctions'
 
 export function CardProduto ({ item }) {
-    
-    function formataPreco (valor) {
-        return 'R$ ' + (valor / 100).toFixed(2).replace('.', ',');
-    }
 
     return (
         <a href={`/product/${item.id}`} className="products__list--item">
