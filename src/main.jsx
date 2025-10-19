@@ -14,16 +14,23 @@ function Layout() {
 
   const adicionarAoCarrinho = (produto, quantidade, observacao) => {
 
-    const produtoExiste = carrinho.find(item => {
-      item.idProduto === produto.id && item.observacao === observacao
+    const obsNormalizada = observacao?.trim() || '';
+
+    const produtoExiste = carrinho.find(item =>{
+      const eMesmoProduto = String(item.idProduto) === String(produto.id);
+      const eMesmaObs = (item.observacao?.trim() || '') === obsNormalizada;
+
+      return eMesmoProduto && eMesmaObs;
     });
 
-    if (produtoExiste) {
+    if (produtoExiste) {      
+
+      const novaQuantidade = produtoExiste.quantidade + quantidade;
 
       setCarrinho(carrinho.map(item => 
-        item.id === produtoExiste.id ? { ...item, quantidade: item.quantidade + quantidade } : item
-
+        item.id === produtoExiste.id ? { ...item, quantidade: novaQuantidade } : item
       ));
+
     } else {
 
     const novoItem = {
@@ -35,14 +42,15 @@ function Layout() {
       preco: produto.preco.por,
       vegano: produto.vegano,
       quantidade: quantidade,
-      observacao: observacao
+      observacao: obsNormalizada
     };
     
   setCarrinho([...carrinho, novoItem]);
-  console.log('Item adicionado ao carrinho:', novoItem);
+
     }
 
   setIsCarrinhoOpen(true);
+
 };
 
   const removerDoCarrinho = (id) => {

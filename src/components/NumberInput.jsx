@@ -31,21 +31,21 @@ export function NumberInput ({ value = 1, onChange, min = 1, max = 99 }) {
     return  <section className="product__quantity">
                   <button 
                   type="button"
-                  className="product__quantity--minus"
+                  className="product__quantityMinus"
                   onClick={menosUm}>
                         <img src={MinusImage} alt="menos um" />
                   </button>
 
                   <input 
                   type="number" 
-                  className="product__quantity--input" 
+                  className="product__quantityInput" 
                   value={value}
                   onChange={handleInputChange}
                   readOnly />
 
                   <button 
                   type="button"
-                  className="product__quantity--plus"
+                  className="product__quantityPlus"
                   onClick={maisUm}>
                         <img src={PlusImage} alt="mais um" />
                   </button>

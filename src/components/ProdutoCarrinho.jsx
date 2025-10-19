@@ -2,6 +2,7 @@ import deleteImage from '../assets/Trash.svg'
 import plantImage from '../assets/Plant.png'
 import cowImage from '../assets/Cow.png'
 import { NumberInput } from "./NumberInput";
+import formataPreco from '../utils/generalFunctions';
 
 export default function ProdutoCarrinho({ item, onDelete, onUpdateQuantity }) {
   return  <div className="cart__product">
@@ -43,7 +44,7 @@ export default function ProdutoCarrinho({ item, onDelete, onUpdateQuantity }) {
                 </div>
   
                 <div className="cart__productRow">
-                  <h3 className="cart__productPrice">{item.preco}</h3>
+                  <h3 className="cart__productPrice">{formataPreco(item.preco)}</h3>
                   <NumberInput
                   value={item.quantidade}
                   onChange={onUpdateQuantity} />

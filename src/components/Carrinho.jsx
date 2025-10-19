@@ -42,7 +42,7 @@ export function Carrinho({
 
             <button
 
-            className='cart__deleteAll'
+            className='cart__delete-all'
             onClick={() => {
 
               if (confirm('Voce deseja remover todos os itens do seu carrinho?')) {
