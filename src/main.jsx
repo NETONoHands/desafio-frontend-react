@@ -1,4 +1,4 @@
-import { StrictMode, useState } from 'react'
+import { StrictMode, useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './css/global.css'
 import { Product }  from './pages/Product'
@@ -7,10 +7,18 @@ import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
 
-function Layout() {
+function useCarrinhoStorage() {
 
-  const [carrinho, setCarrinho] = useState([]);
+  const [carrinho, setCarrinho] = useState(() => {
+    const carrinhoSalvo = localStorage.getItem('carrinho');
+    return carrinhoSalvo ? JSON.parse(carrinhoSalvo) : [];
+  });
+
   const [isCarrinhoOpen, setIsCarrinhoOpen] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+  }, [carrinho]);
 
   const adicionarAoCarrinho = (produto, quantidade, observacao) => {
 
@@ -72,6 +80,31 @@ function Layout() {
 
   const abreCarrinho = () => setIsCarrinhoOpen(true);
   const fechaCarrinho = () => setIsCarrinhoOpen(false);
+
+  return {
+    carrinho, 
+    isCarrinhoOpen, 
+    adicionarAoCarrinho, 
+    removerDoCarrinho, 
+    atualizarCarrinho, 
+    limpaCarrinho,
+    abreCarrinho,
+    fechaCarrinho
+  }
+}
+
+function Layout() {
+
+  const {
+    carrinho,
+  isCarrinhoOpen,
+  adicionarAoCarrinho,
+  removerDoCarrinho,
+  atualizarCarrinho,
+  limpaCarrinho,
+  abreCarrinho,
+  fechaCarrinho
+  } = useCarrinhoStorage()
 
   return (
     <div>
